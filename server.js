@@ -47,9 +47,7 @@ app.get("/", (req, res) => {
 app.post('/login',async(req,res)=>{
   try{
     let r=await userData.findOne({mail:req.body.mail})
-    console.log(r);
     let isMatch=await bcrypt.compare(req.body.password,r.password);
-    console.log("This is password from backend  "+r.password);
     res.send(isMatch);
   }catch(err){
     console.log("error", err);
