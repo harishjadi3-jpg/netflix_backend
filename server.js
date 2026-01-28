@@ -25,23 +25,28 @@ const usersDataSchema = new mongoose.Schema({
   mail:String,
   password:String,
 })
-const userData=new mongoose.model("user",usersDataSchema);
+const useData=new mongoose.model("user",usersDataSchema);
 
 app.post('/details', async (req, res) => {
-  try{
-    console.log(req.body)
-    const hashedPassword=await bcrypt.hash(req.body.password,10);
-    req.body.password=hashedPassword;
-    const user = new userData(req.body);
+  try {
+    const { userName,mail,password } = req.body;
+
+    if (!userName || !mail || !password) {
+      return res.status(400).send("Missing fields");
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      userName,
+      mail,
+      password: hashedPassword
+    });
     await user.save();
-    console.log("Data Saved"+req.body.userName);
-    console.log("Data Saved"+req.body.mail);
-    console.log("Data Saved"+req.body.password);
     res.send("Saved to DB");
-  }catch(err){
-    res.status(500).send("addind details error");
+  } catch (err) {
+    console.error("Save error:", err.message);
+    res.status(500).send("DB error");
   }
-})
+});
 
 app.get("/", (req, res) => {
   res.send("Backend is running");
