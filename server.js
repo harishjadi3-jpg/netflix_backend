@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import bcrypt from 'bcrypt'
-import dotenv from 'dotent'
+import dotenv from 'dotenv'
 const app = express()
 const port = 3000
 
