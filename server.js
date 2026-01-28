@@ -4,7 +4,7 @@ import cors from 'cors'
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 
 dotenv.config()
 
@@ -58,6 +58,6 @@ app.post('/login',async(req,res)=>{
     res.status(500).send("Error while checking")
 }
 })
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
 })
