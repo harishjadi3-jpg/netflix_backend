@@ -17,7 +17,6 @@ mongoose.connect(process.env.MONGO_URI)
     }).catch(() => {
       console.log("error");
     });
-
 const usersDataSchema = new mongoose.Schema({
   userName:String,
   mail:String,
