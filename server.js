@@ -26,9 +26,9 @@ const usersDataSchema = new mongoose.Schema({
   password:String,
 })
 const userData=new mongoose.model("user",usersDataSchema);
-
 app.post('/details', async (req, res) => {
   try{
+    console.log("from frontend"+ req.body)
     const hashedPassword=await bcrypt.hash(req.body.password,10);
     req.body.password = hashedPassword;
     const user = new userData(req.body);
