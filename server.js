@@ -29,7 +29,6 @@ const userData=new mongoose.model("user",usersDataSchema);
 
 app.post('/details', async (req, res) => {
   try{
-    const hashedPassword=await bcrypt.hash(req.body.password,10);
     const user = new userData(req.body);
     await user.save();
     res.send("Saved to DB");
