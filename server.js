@@ -32,11 +32,9 @@ app.post('/details', async (req, res) => {
     const hashedPassword=await bcrypt.hash(req.body.password,10);
     const user = new userData(req.body);
     await user.save();
-    console.log("Data Saved"+req.body.userName);
-    console.log("Data Saved"+req.body.mail);
-    console.log("Data Saved"+req.body.password);
     res.send("Saved to DB");
   }catch(err){
+      console.log("error", err);
     res.status(500).send("addind details error");
   }
 })
@@ -53,6 +51,7 @@ app.post('/login',async(req,res)=>{
     console.log("This is password from backend  "+r.password);
     res.send(isMatch);
   }catch(err){
+    console.log("error", err);
     res.status(500).send("Error while checking")
 }
 })
