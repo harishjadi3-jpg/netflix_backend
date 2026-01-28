@@ -39,7 +39,7 @@ app.post('/details', async (req, res) => {
     console.log("Data Saved"+req.body.password);
     res.send("Saved to DB");
   }catch(err){
-    res.status(500).send(err);
+    res.status(500).send("addind details error");
   }
 })
 
